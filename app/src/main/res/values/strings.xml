@@ -5,4 +5,5 @@
     <string name="time">Time</string>
     <string name="date">Date</string>
     <string name="tasks">Tasks</string>
+    <string name="hour_minute">%1$s:%2$s</string>
 </resources>
