@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dream_in_color">#FF1B676B</color>
+    <color name="dream_in_green">#FF519548</color>
+    <color name="dream_in_lime">#FF88C425</color>
+    <color name="dream_in_grellow">#FFBEF202</color>
+    <color name="dream_base">#FFEAFDE6</color>
 </resources>
