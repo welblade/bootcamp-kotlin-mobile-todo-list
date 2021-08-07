@@ -1,5 +1,6 @@
 package com.github.welblade.todolist.ui
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.welblade.todolist.R
@@ -55,6 +56,8 @@ class FormTaskActivity: AppCompatActivity() {
                 hour = binding.tilTime.editText?.text.toString()
             )
             TaskDataSource.insertTask(task)
+            setResult(Activity.RESULT_OK)
+            finish()
         }
     }
 }
