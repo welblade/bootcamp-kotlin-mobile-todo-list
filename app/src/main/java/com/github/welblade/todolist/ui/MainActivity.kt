@@ -46,7 +46,8 @@ class MainActivity : AppCompatActivity() {
             startForResult.launch(editTaskIntent)
         }
         adapter.removeTaskListener = {
-
+            TaskDataSource.removeTask(it)
+            initTaskList()
         }
     }
 }

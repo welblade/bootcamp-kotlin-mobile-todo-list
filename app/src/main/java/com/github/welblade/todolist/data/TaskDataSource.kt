@@ -16,7 +16,9 @@ object TaskDataSource {
         }
 
     }
-
+    fun removeTask(task: Task){
+        taskList.remove(task)
+    }
     fun findById(taskId: Int): Task? {
         return taskList.find {
             it.id == taskId
