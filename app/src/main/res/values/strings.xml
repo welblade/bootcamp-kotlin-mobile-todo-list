@@ -7,4 +7,6 @@
     <string name="tasks">Tasks</string>
     <string name="hour_minute">%1$s:%2$s</string>
     <string name="more">More</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
 </resources>

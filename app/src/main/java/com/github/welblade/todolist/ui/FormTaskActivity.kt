@@ -17,10 +17,19 @@ class FormTaskActivity: AppCompatActivity() {
     private val binding: ActivityFormTaskBinding by lazy {
         ActivityFormTaskBinding.inflate(layoutInflater)
     }
+    private var currentTaskId:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         insertListeners()
+        if(intent.hasExtra(TASK_ID)){
+            currentTaskId = intent.getIntExtra(TASK_ID, 0)
+            TaskDataSource.findById(currentTaskId)?.let {
+                binding.tilTitle.editText?.setText( it.title)
+                binding.tilDate.editText?.setText( it.date)
+                binding.tilTime.editText?.setText( it.hour)
+            }
+        }
     }
 
     private fun insertListeners() {
@@ -53,11 +62,15 @@ class FormTaskActivity: AppCompatActivity() {
             val task = Task(
                 title = binding.tilTitle.editText?.text.toString(),
                 date = binding.tilDate.editText?.text.toString(),
-                hour = binding.tilTime.editText?.text.toString()
+                hour = binding.tilTime.editText?.text.toString(),
+                id = this.currentTaskId
             )
             TaskDataSource.insertTask(task)
             setResult(Activity.RESULT_OK)
             finish()
         }
+    }
+    companion object {
+        const val TASK_ID = "task_id"
     }
 }

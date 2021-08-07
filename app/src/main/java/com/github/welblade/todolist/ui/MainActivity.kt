@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
             initTaskList()
         }
     }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -41,6 +39,14 @@ class MainActivity : AppCompatActivity() {
         binding.btCreateTask.setOnClickListener {
             val createTaskIntent = Intent(this, FormTaskActivity::class.java)
             startForResult.launch(createTaskIntent)
+        }
+        adapter.editTaskListener = {
+            val editTaskIntent = Intent(this, FormTaskActivity::class.java)
+            editTaskIntent.putExtra(FormTaskActivity.TASK_ID, it.id)
+            startForResult.launch(editTaskIntent)
+        }
+        adapter.removeTaskListener = {
+
         }
     }
 }
