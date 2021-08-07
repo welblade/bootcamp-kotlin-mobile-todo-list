@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.github.welblade.todolist.data.TaskDataSource
@@ -32,7 +33,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initTaskList(){
         binding.rvTaskList.adapter = adapter
-        adapter.submitList(TaskDataSource.getList())
+        val list = TaskDataSource.getList()
+        binding.emptyStateLayout.root.visibility =
+            if(list.isEmpty()) View.VISIBLE else View.GONE
+        adapter.submitList(list)
     }
 
     private fun insertListeners() {

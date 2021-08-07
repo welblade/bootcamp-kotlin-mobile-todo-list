@@ -9,4 +9,6 @@
     <string name="more">More</string>
     <string name="edit">Edit</string>
     <string name="remove">Remove</string>
+    <string name="ooops_you_don_t_have_any_task_today">Ooops, you don\'t have nothing\n TO DO today!</string>
+    <string name="a_sleeping_cat">A sleeping cat</string>
 </resources>
