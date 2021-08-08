@@ -13,4 +13,24 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.TODOList.CardView" parent="Theme.TODOList">
+        <item name="strokeColor">@color/dream_in_color</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="materialCardViewStyle">@style/Theme.TODOList.CardViewStyle</item>
+        <item name="android:backgroundTint">@color/dream_base</item>
+        <item name="android:textViewStyle">@style/Theme.TODOList.CardView.TextView</item>
+    </style>
+    <style name="Theme.TODOList.CardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">4dp</item>
+    </style>
+    <style name="Theme.TODOList.CardView.TextView" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/dream_in_color</item>
+    </style>
+    <style name="Theme.TODOList.CardView.Active" parent="Theme.TODOList.CardView">
+        <item name="android:backgroundTint">@color/dream_in_color</item>
+        <item name="android:textViewStyle">@style/Theme.TODOList.CardView.TextView.Active</item>
+    </style>
+    <style name="Theme.TODOList.CardView.TextView.Active" parent="Theme.TODOList.CardView.TextView">
+        <item name="android:textColor">@color/dream_base</item>
+    </style>
 </resources>
