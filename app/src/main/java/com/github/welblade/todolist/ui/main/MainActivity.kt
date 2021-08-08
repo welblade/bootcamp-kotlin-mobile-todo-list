@@ -1,4 +1,4 @@
-package com.github.welblade.todolist.ui
+package com.github.welblade.todolist.ui.main
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.github.welblade.todolist.data.TaskDataSource
 import com.github.welblade.todolist.databinding.ActivityMainBinding
+import com.github.welblade.todolist.ui.form_task.FormTaskActivity
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {

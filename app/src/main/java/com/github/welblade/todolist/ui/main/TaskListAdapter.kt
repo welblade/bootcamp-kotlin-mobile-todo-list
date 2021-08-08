@@ -1,4 +1,4 @@
-package com.github.welblade.todolist.ui
+package com.github.welblade.todolist.ui.main
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
