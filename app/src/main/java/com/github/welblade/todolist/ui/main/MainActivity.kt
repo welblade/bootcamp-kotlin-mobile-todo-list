@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        initDateList(Date())
+        initRVDate(Date())
         initTaskList()
         insertListeners()
     }
@@ -48,19 +48,22 @@ class MainActivity : AppCompatActivity() {
             if(list.isEmpty()) View.VISIBLE else View.GONE
         adapter.submitList(list)
     }
-
-    private fun initDateList(date: Date){
-        dateViewModel.dateRangeFrom(date)
-        dateAdapter.selectDate(date)
+    private fun initRVDate(date: Date){
         binding.rvDateList.apply {
             setHasFixedSize(true)
             adapter = dateAdapter
             addItemDecoration(HorizontalSpaceItemDecorator(8))
         }
+        initDateList(date)
+    }
+    private fun initDateList(date: Date){
+        dateViewModel.dateRangeFrom(date)
+        dateAdapter.selectDate(date)
         lifecycleScope.launch {
             dateViewModel.dateList.collectLatest { source -> dateAdapter.submitData(source) }
         }
     }
+
 
     private fun insertListeners() {
         binding.btCreateTask.setOnClickListener {
@@ -75,6 +78,9 @@ class MainActivity : AppCompatActivity() {
         adapter.removeTaskListener = {
             TaskDataSource.removeTask(it)
             initTaskList()
+        }
+        dateAdapter.selectDateListener = {
+            dateAdapter.selectDate(it)
         }
     }
 }

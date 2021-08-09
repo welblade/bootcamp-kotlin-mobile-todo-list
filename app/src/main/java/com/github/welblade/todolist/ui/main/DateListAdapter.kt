@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.github.welblade.todolist.R
 import com.github.welblade.todolist.databinding.ItemDateBinding
 import com.github.welblade.todolist.extensions.format
 import java.util.*
@@ -20,6 +19,7 @@ class DateListAdapter: PagingDataAdapter<Date, DateListAdapter.ViewHolder>(DiffC
         )
         return ViewHolder(binding)
     }
+    var selectDateListener: (date: Date) -> Unit = {}
     private var selectedItem: ItemDateBinding? = null
     private var selectedDate: Date? = null
 
@@ -39,6 +39,11 @@ class DateListAdapter: PagingDataAdapter<Date, DateListAdapter.ViewHolder>(DiffC
                 selectThisDate()
             } else if(!item.cvRoot.isEnabled) {
                 enableDate(item,true)
+            }
+            item.cvRoot.setOnClickListener {
+                selectThisDate()
+                selectDateListener(date)
+
             }
         }
         private fun enableDate(cvItem: ItemDateBinding, isEnable: Boolean) {

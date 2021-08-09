@@ -7,7 +7,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:theme="@style/Theme.TODOList.CardView"
-    >
+    android:clickable="true"
+    android:focusable="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="96dp"
         android:layout_height="wrap_content"
