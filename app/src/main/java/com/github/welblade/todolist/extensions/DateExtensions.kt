@@ -9,6 +9,6 @@ fun Date.format(pattern: String = "dd/MM/yyyy"): String {
 fun Date.plusDays(amount: Int): Date{
     val c = Calendar.getInstance()
     c.time = this
-    c.add(Calendar.DATE, amount)
+    c.add(Calendar.DAY_OF_YEAR, amount)
     return c.time
 }

@@ -16,13 +16,10 @@ class DatePagingSource(private val initialDate: Date) : PagingSource<Long, Date>
         val position = params.key ?: initialDate.time
         val dates:MutableList<Date> = arrayListOf()
         dates.add(Date(position))
-        for(i in 1..6){
-            dates.add(dates.last().plusDays(1))
-        }
         return LoadResult.Page(
             data = dates.toList(),
-            prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
-            nextKey = if (dates.isNullOrEmpty()) null else position + 1
+            prevKey = if (position == INITIAL_PAGE_INDEX) null else dates.first().plusDays((-1)).time,
+            nextKey = if (dates.isNullOrEmpty()) null else dates.last().plusDays(1).time
         )
     }
 

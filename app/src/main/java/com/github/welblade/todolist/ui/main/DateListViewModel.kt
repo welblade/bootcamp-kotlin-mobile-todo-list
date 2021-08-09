@@ -4,13 +4,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.github.welblade.todolist.data.DatePagingSource
+import kotlinx.coroutines.flow.Flow
 import java.util.*
 
-class DateListViewModel (private val initialDate: Date) : ViewModel(){
+class DateListViewModel (initialDate: Date) : ViewModel(){
 
-    val dateList = Pager(PagingConfig(7)) {
-        com.github.welblade.todolist.data.DatePagingSource(initialDate)
-    }.flow
-    .cachedIn(viewModelScope)
+    private lateinit var _dateList: Flow<PagingData<Date>>
+
+    init {
+        dateRangeFrom(initialDate)
+    }
+    val dateList: Flow<PagingData<Date>>
+        get() = _dateList
+
+    fun dateRangeFrom(date: Date){
+        _dateList = Pager(PagingConfig(2)) {
+            DatePagingSource(date)
+        }.flow.cachedIn(viewModelScope)
+    }
 }
