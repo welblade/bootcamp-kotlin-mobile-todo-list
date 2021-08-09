@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.github.welblade.todolist.R
 import com.github.welblade.todolist.databinding.ItemDateBinding
 import com.github.welblade.todolist.extensions.format
 import java.util.*
@@ -19,15 +20,42 @@ class DateListAdapter: PagingDataAdapter<Date, DateListAdapter.ViewHolder>(DiffC
         )
         return ViewHolder(binding)
     }
+    private var selectedItem: ItemDateBinding? = null
+    private var selectedDate: Date? = null
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position) as Date)
     }
 
-    class ViewHolder(private val item: ItemDateBinding): RecyclerView.ViewHolder(item.root) {
-        fun bind(date: Date){
+    fun selectDate(date: Date){
+        selectedDate = date
+    }
+
+    inner class ViewHolder(private val item: ItemDateBinding): RecyclerView.ViewHolder(item.root) {
+        fun bind(date: Date) {
             item.tvDayOfWeek.text = date.format("EEE")
             item.tvDayOfMonth.text = date.format("dd")
+            if(selectedDate != null && selectedDate?.format() == date.format()) {
+                selectThisDate()
+            } else if(!item.cvRoot.isEnabled) {
+                enableDate(item,true)
+            }
+        }
+        private fun enableDate(cvItem: ItemDateBinding, isEnable: Boolean) {
+            cvItem.apply {
+                cvRoot.isEnabled = isEnable
+                tvDayOfMonth.isEnabled = isEnable
+                tvDayOfWeek.isEnabled = isEnable
+            }
+        }
+        private fun selectThisDate(){
+            if(selectedItem.hashCode() != item.hashCode()){
+                selectedItem?.let{
+                   enableDate(it,true)
+                }
+            }
+            enableDate(item,false)
+            selectedItem = item
         }
     }
 }

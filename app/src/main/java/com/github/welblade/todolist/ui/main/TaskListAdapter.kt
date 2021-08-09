@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.welblade.todolist.R
 import com.github.welblade.todolist.databinding.ItemTaskBinding
 import com.github.welblade.todolist.model.Task
+import java.util.*
 
 class TaskListAdapter: ListAdapter<Task, TaskListAdapter.ViewHolder>(DiffCallBack()) {
     var editTaskListener: (Task) -> Unit = {}
     var removeTaskListener: (Task) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemTaskBinding.inflate(
@@ -62,5 +64,4 @@ class TaskListAdapter: ListAdapter<Task, TaskListAdapter.ViewHolder>(DiffCallBac
                 && oldItem.hour == newItem.hour
                 && oldItem.title == newItem.title
     }
-
 }

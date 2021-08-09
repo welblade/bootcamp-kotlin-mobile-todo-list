@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private val adapter: TaskListAdapter by lazy { TaskListAdapter() }
+
     private val dateViewModel: DateListViewModel by lazy {
         DateListViewModel(Date())
     }
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        initDateList()
+        initDateList(Date())
         initTaskList()
         insertListeners()
     }
@@ -48,8 +49,11 @@ class MainActivity : AppCompatActivity() {
         adapter.submitList(list)
     }
 
-    private fun initDateList(){
+    private fun initDateList(date: Date){
+        dateViewModel.dateRangeFrom(date)
+        dateAdapter.selectDate(date)
         binding.rvDateList.apply {
+            setHasFixedSize(true)
             adapter = dateAdapter
             addItemDecoration(HorizontalSpaceItemDecorator(8))
         }
