@@ -21,7 +21,7 @@ class DateListViewModel (initialDate: Date) : ViewModel(){
         get() = _dateList
 
     fun dateRangeFrom(date: Date){
-        _dateList = Pager(PagingConfig(2)) {
+        _dateList = Pager(PagingConfig(1)) {
             DatePagingSource(date)
         }.flow.cachedIn(viewModelScope)
     }

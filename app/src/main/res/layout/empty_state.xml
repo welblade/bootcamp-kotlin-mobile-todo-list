@@ -16,14 +16,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/iv_empty_state"
         android:layout_marginBottom="16dp"
-        style="@style/TextAppearance.MaterialComponents.Headline5"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:textStyle="bold"
         android:textAlignment="center"
         android:text="@string/ooops_you_don_t_have_any_task_today" />
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_empty_state"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_headline"
         app:layout_constraintBottom_toBottomOf="parent"
