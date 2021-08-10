@@ -30,6 +30,9 @@ class DateListAdapter: PagingDataAdapter<Date, DateListAdapter.ViewHolder>(DiffC
     fun selectDate(date: Date){
         selectedDate = date
     }
+    fun getSelectedDate(): Date {
+        return selectedDate ?: Date()
+    }
 
     inner class ViewHolder(private val item: ItemDateBinding): RecyclerView.ViewHolder(item.root) {
         fun bind(date: Date) {

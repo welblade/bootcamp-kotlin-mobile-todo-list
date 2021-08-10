@@ -78,5 +78,6 @@ class FormTaskActivity: AppCompatActivity() {
     }
     companion object {
         const val TASK_ID = "task_id"
+        const val TASK_DATE = "task_date"
     }
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.welblade.todolist.data.TaskDataSourceImpl
 import com.github.welblade.todolist.data.TaskRepository
 import com.github.welblade.todolist.databinding.ActivityMainBinding
+import com.github.welblade.todolist.extensions.format
 import com.github.welblade.todolist.ui.form_task.FormTaskActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     )
     { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
-            initTaskList()
+            taskListViewModel.getList(dateAdapter.getSelectedDate())
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,10 +52,12 @@ class MainActivity : AppCompatActivity() {
         binding.rvTaskList.adapter = adapter
 
         taskListViewModel.taskList.observe(this, {
-            list -> if(list.isEmpty()) {
-                binding.emptyStateLayout.root.visibility = View.VISIBLE
-            } else {
-                binding.emptyStateLayout.root.visibility = View.GONE
+            list -> run {
+                if (list.isEmpty()) {
+                    binding.emptyStateLayout.root.visibility = View.VISIBLE
+                } else {
+                    binding.emptyStateLayout.root.visibility = View.GONE
+                }
                 adapter.submitList(list)
             }
         })
@@ -83,16 +86,16 @@ class MainActivity : AppCompatActivity() {
         adapter.editTaskListener = {
             val editTaskIntent = Intent(this, FormTaskActivity::class.java)
             editTaskIntent.putExtra(FormTaskActivity.TASK_ID, it.id)
+            editTaskIntent.putExtra(FormTaskActivity.TASK_DATE, dateAdapter.getSelectedDate().format())
             startForResult.launch(editTaskIntent)
         }
         adapter.removeTaskListener = {
             taskListViewModel.remove(it)
-            adapter.notifyDataSetChanged()
+            taskListViewModel.getList(dateAdapter.getSelectedDate())
         }
         dateAdapter.selectDateListener = {
             dateAdapter.selectDate(it)
             taskListViewModel.getList(it)
-            adapter.notifyDataSetChanged()
         }
     }
 }
