@@ -2,13 +2,14 @@ package com.github.welblade.todolist.ui.main
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.github.welblade.todolist.data.TaskDataSource
+import com.github.welblade.todolist.data.TaskDataSourceImpl
+import com.github.welblade.todolist.data.TaskRepository
 import com.github.welblade.todolist.databinding.ActivityMainBinding
 import com.github.welblade.todolist.ui.form_task.FormTaskActivity
 import kotlinx.coroutines.flow.collectLatest
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private val dateViewModel: DateListViewModel by lazy {
         DateListViewModel(Date())
     }
+    private lateinit var taskListViewModel: TaskListViewModel
+
     private val dateAdapter: DateListAdapter by lazy { DateListAdapter() }
     private val startForResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -36,6 +39,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val taskDataSource = TaskDataSourceImpl
+        val taskRepository = TaskRepository(taskDataSource)
+        taskListViewModel = TaskListViewModel(taskRepository)
         initRVDate(Date())
         initTaskList()
         insertListeners()
@@ -43,10 +49,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun initTaskList(){
         binding.rvTaskList.adapter = adapter
-        val list = TaskDataSource.getList()
-        binding.emptyStateLayout.root.visibility =
-            if(list.isEmpty()) View.VISIBLE else View.GONE
-        adapter.submitList(list)
+
+        taskListViewModel.taskList.observe(this, {
+            list -> if(list.isEmpty()) {
+                binding.emptyStateLayout.root.visibility = View.VISIBLE
+            } else {
+                binding.emptyStateLayout.root.visibility = View.GONE
+                adapter.submitList(list)
+            }
+        })
     }
     private fun initRVDate(date: Date){
         binding.rvDateList.apply {
@@ -64,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun insertListeners() {
         binding.btCreateTask.setOnClickListener {
             val createTaskIntent = Intent(this, FormTaskActivity::class.java)
@@ -76,11 +86,13 @@ class MainActivity : AppCompatActivity() {
             startForResult.launch(editTaskIntent)
         }
         adapter.removeTaskListener = {
-            TaskDataSource.removeTask(it)
-            initTaskList()
+            taskListViewModel.remove(it)
+            adapter.notifyDataSetChanged()
         }
         dateAdapter.selectDateListener = {
             dateAdapter.selectDate(it)
+            taskListViewModel.getList(it)
+            adapter.notifyDataSetChanged()
         }
     }
 }

@@ -4,10 +4,12 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.welblade.todolist.R
-import com.github.welblade.todolist.data.TaskDataSource
+import com.github.welblade.todolist.data.TaskDataSourceImpl
+import com.github.welblade.todolist.data.TaskRepository
 import com.github.welblade.todolist.databinding.ActivityFormTaskBinding
 import com.github.welblade.todolist.extensions.format
 import com.github.welblade.todolist.model.Task
+import com.github.welblade.todolist.ui.main.TaskListViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -17,14 +19,18 @@ class FormTaskActivity: AppCompatActivity() {
     private val binding: ActivityFormTaskBinding by lazy {
         ActivityFormTaskBinding.inflate(layoutInflater)
     }
+    private lateinit var taskListViewModel: TaskListViewModel
     private var currentTaskId:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val taskDataSource = TaskDataSourceImpl
+        val taskRepository = TaskRepository(taskDataSource)
+        taskListViewModel = TaskListViewModel(taskRepository)
         insertListeners()
         if(intent.hasExtra(TASK_ID)){
             currentTaskId = intent.getIntExtra(TASK_ID, 0)
-            TaskDataSource.findById(currentTaskId)?.let {
+            taskListViewModel.findById(currentTaskId)?.let {
                 binding.tilTitle.editText?.setText( it.title)
                 binding.tilDate.editText?.setText( it.date)
                 binding.tilTime.editText?.setText( it.hour)
@@ -65,7 +71,7 @@ class FormTaskActivity: AppCompatActivity() {
                 hour = binding.tilTime.editText?.text.toString(),
                 id = this.currentTaskId
             )
-            TaskDataSource.insertTask(task)
+            taskListViewModel.insert(task)
             setResult(Activity.RESULT_OK)
             finish()
         }
