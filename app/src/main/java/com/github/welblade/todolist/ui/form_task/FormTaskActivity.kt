@@ -4,7 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.welblade.todolist.R
-import com.github.welblade.todolist.data.TaskDataSourceImpl
+import com.github.welblade.todolist.data.TaskDataSourceInMemoryImpl
 import com.github.welblade.todolist.data.TaskRepository
 import com.github.welblade.todolist.databinding.ActivityFormTaskBinding
 import com.github.welblade.todolist.extensions.format
@@ -24,7 +24,7 @@ class FormTaskActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val taskDataSource = TaskDataSourceImpl
+        val taskDataSource = TaskDataSourceInMemoryImpl
         val taskRepository = TaskRepository(taskDataSource)
         taskListViewModel = TaskListViewModel(taskRepository)
         insertListeners()
@@ -37,6 +37,7 @@ class FormTaskActivity: AppCompatActivity() {
             currentTaskId = intent.getIntExtra(TASK_ID, 0)
             taskListViewModel.findById(currentTaskId)?.let {
                 binding.tilTitle.editText?.setText( it.title)
+                binding.tilDescription.editText?.setText(it.description)
                 binding.tilDate.editText?.setText( it.date)
                 binding.tilTime.editText?.setText( it.hour)
             }
@@ -75,6 +76,7 @@ class FormTaskActivity: AppCompatActivity() {
         binding.btSave.setOnClickListener {
             val task = Task(
                 title = binding.tilTitle.editText?.text.toString(),
+                description = binding.tilDescription.editText?.text.toString(),
                 date = binding.tilDate.editText?.text.toString(),
                 hour = binding.tilTime.editText?.text.toString(),
                 id = this.currentTaskId

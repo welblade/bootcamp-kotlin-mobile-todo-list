@@ -2,7 +2,7 @@ package com.github.welblade.todolist.data
 
 import com.github.welblade.todolist.model.Task
 
-object TaskDataSourceImpl : TaskDataSource {
+object TaskDataSourceInMemoryImpl : TaskDataSource {
     override val taskList = arrayListOf<Task>()
 
     override fun getList() = taskList.toList()
