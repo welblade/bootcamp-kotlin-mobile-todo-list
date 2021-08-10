@@ -13,6 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.TODOList.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/dream_in_green</item>
+    </style>
     <style name="Theme.TODOList.CardView" parent="Theme.TODOList">
         <item name="strokeColor">@color/dream_in_color</item>
         <item name="strokeWidth">2dp</item>

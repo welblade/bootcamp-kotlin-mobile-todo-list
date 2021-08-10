@@ -34,7 +34,7 @@ class TaskListAdapter: ListAdapter<Task, TaskListAdapter.ViewHolder>(DiffCallBac
         @SuppressLint("SetTextI18n")
         fun bind(task: Task) {
             item.tvTitle.text = task.title
-            item.tvHour.text = task.date + " " + task.hour
+            item.tvHour.text = task.hour
             item.ivMore.setOnClickListener {
                 showPopUp(task)
             }

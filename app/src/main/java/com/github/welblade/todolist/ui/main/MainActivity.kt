@@ -4,15 +4,19 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
+import com.github.welblade.todolist.R
 import com.github.welblade.todolist.data.TaskDataSourceImpl
 import com.github.welblade.todolist.data.TaskRepository
 import com.github.welblade.todolist.databinding.ActivityMainBinding
 import com.github.welblade.todolist.extensions.format
 import com.github.welblade.todolist.ui.form_task.FormTaskActivity
+import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.*
@@ -97,5 +101,14 @@ class MainActivity : AppCompatActivity() {
             dateAdapter.selectDate(it)
             taskListViewModel.getList(it)
         }
+        binding.rvDateList.addOnChildAttachStateChangeListener( object: RecyclerView.OnChildAttachStateChangeListener{
+            override fun onChildViewAttachedToWindow(view: View) {
+                val item = view as MaterialCardView
+                val month = item.findViewById<TextView>(R.id.tv_month).text
+                if(month != binding.tvDateListTitle.text)
+                    binding.tvDateListTitle.text = month
+            }
+            override fun onChildViewDetachedFromWindow(view: View) {}
+        })
     }
 }

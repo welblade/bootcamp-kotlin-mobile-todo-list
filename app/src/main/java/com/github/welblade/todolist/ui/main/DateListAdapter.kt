@@ -36,6 +36,7 @@ class DateListAdapter: PagingDataAdapter<Date, DateListAdapter.ViewHolder>(DiffC
 
     inner class ViewHolder(private val item: ItemDateBinding): RecyclerView.ViewHolder(item.root) {
         fun bind(date: Date) {
+            item.tvMonth.text = date.format("MMMM")
             item.tvDayOfWeek.text = date.format("EEE")
             item.tvDayOfMonth.text = date.format("dd")
             if(selectedDate != null && selectedDate?.format() == date.format()) {
