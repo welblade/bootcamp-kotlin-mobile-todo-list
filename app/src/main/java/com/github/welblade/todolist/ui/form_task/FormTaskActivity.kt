@@ -28,6 +28,11 @@ class FormTaskActivity: AppCompatActivity() {
         val taskRepository = TaskRepository(taskDataSource)
         taskListViewModel = TaskListViewModel(taskRepository)
         insertListeners()
+        if(intent.hasExtra(TASK_DATE)){
+            binding.tilDate.editText?.setText(
+                intent.getStringExtra(TASK_DATE)
+            )
+        }
         if(intent.hasExtra(TASK_ID)){
             currentTaskId = intent.getIntExtra(TASK_ID, 0)
             taskListViewModel.findById(currentTaskId)?.let {
@@ -62,6 +67,9 @@ class FormTaskActivity: AppCompatActivity() {
             }.show(supportFragmentManager, "TIME_PICKER")
         }
         binding.btCancel.setOnClickListener {
+            finish()
+        }
+        binding.toolbar.setNavigationOnClickListener {
             finish()
         }
         binding.btSave.setOnClickListener {

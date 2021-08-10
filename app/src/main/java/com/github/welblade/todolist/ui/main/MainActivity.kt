@@ -81,12 +81,12 @@ class MainActivity : AppCompatActivity() {
     private fun insertListeners() {
         binding.btCreateTask.setOnClickListener {
             val createTaskIntent = Intent(this, FormTaskActivity::class.java)
+            createTaskIntent.putExtra(FormTaskActivity.TASK_DATE, dateAdapter.getSelectedDate().format())
             startForResult.launch(createTaskIntent)
         }
         adapter.editTaskListener = {
             val editTaskIntent = Intent(this, FormTaskActivity::class.java)
             editTaskIntent.putExtra(FormTaskActivity.TASK_ID, it.id)
-            editTaskIntent.putExtra(FormTaskActivity.TASK_DATE, dateAdapter.getSelectedDate().format())
             startForResult.launch(editTaskIntent)
         }
         adapter.removeTaskListener = {
