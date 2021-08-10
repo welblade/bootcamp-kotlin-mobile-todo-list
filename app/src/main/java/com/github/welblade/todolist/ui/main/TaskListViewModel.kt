@@ -31,7 +31,7 @@ class TaskListViewModel (private val taskRepository: TaskRepository ): ViewModel
         }.start()
     }
 
-    fun findById(taskId: Int) = taskRepository.findById(taskId)
+    fun findById(taskId: String) = taskRepository.findById(taskId)
     fun insert(task:Task) = taskRepository.insertTask(task)
     fun remove(task:Task) = taskRepository.removeTask(task)
 

@@ -21,7 +21,7 @@ class FormTaskActivity: AppCompatActivity() {
         ActivityFormTaskBinding.inflate(layoutInflater)
     }
     private lateinit var taskListViewModel: TaskListViewModel
-    private var currentTaskId:Int = 0
+    private var currentTaskId:String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -35,7 +35,7 @@ class FormTaskActivity: AppCompatActivity() {
             )
         }
         if(intent.hasExtra(TASK_ID)){
-            currentTaskId = intent.getIntExtra(TASK_ID, 0)
+            currentTaskId = intent.getStringExtra(TASK_ID) as String
             taskListViewModel.findById(currentTaskId)?.let {
                 binding.tilTitle.editText?.setText( it.title)
                 binding.tilDescription.editText?.setText(it.description)

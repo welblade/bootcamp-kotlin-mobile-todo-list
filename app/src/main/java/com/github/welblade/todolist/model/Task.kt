@@ -1,11 +1,13 @@
 package com.github.welblade.todolist.model
 
+import java.util.zip.CRC32
+
 data class Task(
     val title: String,
     val description: String,
     val date: String,
     val hour: String,
-    val id: Int = 0
+    val id: String = ""
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -19,6 +21,6 @@ data class Task(
     }
 
     override fun hashCode(): Int {
-        return id
+        return "$id$title$description$date$hour".hashCode()
     }
 }

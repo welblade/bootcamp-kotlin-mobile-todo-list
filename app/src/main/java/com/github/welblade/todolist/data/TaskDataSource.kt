@@ -7,6 +7,6 @@ interface TaskDataSource {
     fun getList(): List<Task>
     fun insertTask(task: Task)
     fun removeTask(task: Task)
-    fun findById(taskId: Int): Task?
+    fun findById(taskId: String): Task?
     fun findByDate(taskDate: String): List<Task>
 }

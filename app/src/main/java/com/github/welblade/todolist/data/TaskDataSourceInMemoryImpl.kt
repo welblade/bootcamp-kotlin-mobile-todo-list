@@ -8,8 +8,8 @@ object TaskDataSourceInMemoryImpl : TaskDataSource {
     override fun getList() = taskList.toList()
 
     override fun insertTask(task: Task){
-        if (task.id == 0) {
-            taskList.add(task.copy(id = taskList.size + 1))
+        if (task.id.isNullOrBlank()) {
+            taskList.add(task.copy(id = (taskList.size + 1).toString()))
         } else {
             taskList.remove(task)
             taskList.add(task)
@@ -19,7 +19,7 @@ object TaskDataSourceInMemoryImpl : TaskDataSource {
     override fun removeTask(task: Task){
         taskList.remove(task)
     }
-    override fun findById(taskId: Int): Task? {
+    override fun findById(taskId: String): Task? {
         return taskList.find {
             it.id == taskId
         }
