@@ -41,6 +41,8 @@ class FormTaskActivity: AppCompatActivity() {
                 binding.tilDate.editText?.setText( it.date)
                 binding.tilTime.editText?.setText( it.hour)
             }
+            binding.toolbar.title = getString(R.string.edit_task)
+            binding.btSave.text = getString(R.string.save_changes)
         }
     }
 
