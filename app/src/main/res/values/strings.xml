@@ -12,4 +12,5 @@
     <string name="ooops_you_don_t_have_any_task_today">Ooops, you don\'t have nothing TO DO today!</string>
     <string name="a_sleeping_cat">A sleeping cat</string>
     <string name="day_tasks">Today\'s tasks</string>
+    <string name="description">Description</string>
 </resources>
