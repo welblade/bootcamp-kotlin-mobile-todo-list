@@ -2,6 +2,7 @@ package com.github.welblade.todolist.ui.form_task
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.welblade.todolist.R
 import com.github.welblade.todolist.data.TaskDataSourceInMemoryImpl
@@ -46,6 +47,8 @@ class FormTaskActivity: AppCompatActivity() {
         }
     }
 
+
+
     private fun insertListeners() {
         binding.tilDate.editText?.setOnClickListener {
            MaterialDatePicker.Builder.datePicker().build().apply {
@@ -76,17 +79,38 @@ class FormTaskActivity: AppCompatActivity() {
             finish()
         }
         binding.btSave.setOnClickListener {
-            val task = Task(
-                title = binding.tilTitle.editText?.text.toString(),
-                description = binding.tilDescription.editText?.text.toString(),
-                date = binding.tilDate.editText?.text.toString(),
-                hour = binding.tilTime.editText?.text.toString(),
-                id = this.currentTaskId
-            )
-            taskListViewModel.insert(task)
-            setResult(Activity.RESULT_OK)
-            finish()
+            if(validateFields()){
+                val task = Task(
+                    title = binding.tilTitle.editText?.text.toString(),
+                    description = binding.tilDescription.editText?.text.toString(),
+                    date = binding.tilDate.editText?.text.toString(),
+                    hour = binding.tilTime.editText?.text.toString(),
+                    id = this.currentTaskId
+                )
+                taskListViewModel.insert(task)
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
         }
+    }
+    private fun validateFields(): Boolean{
+        var isValid = true
+        binding.tvTitleError.visibility = View.GONE
+        binding.tvDateError.visibility = View.GONE
+        binding.tvTimeError.visibility = View.GONE
+        if(binding.tilTitle.editText?.text.isNullOrBlank()){
+            isValid = false
+            binding.tvTitleError.visibility = View.VISIBLE
+        }
+        if(binding.tilDate.editText?.text.isNullOrBlank()){
+            isValid = false
+            binding.tvDateError.visibility = View.VISIBLE
+        }
+        if(binding.tilTime.editText?.text.isNullOrBlank()){
+            isValid = false
+            binding.tvTimeError.visibility = View.VISIBLE
+        }
+        return isValid
     }
     companion object {
         const val TASK_ID = "task_id"

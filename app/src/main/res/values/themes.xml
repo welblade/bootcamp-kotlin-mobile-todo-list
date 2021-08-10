@@ -17,6 +17,11 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/dream_in_green</item>
     </style>
+    <style name="Theme.TODOList.Error" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textColor">@color/dream_in_fire</item>
+    </style>
     <style name="Theme.TODOList.CardView" parent="Theme.TODOList">
         <item name="strokeColor">@color/dream_in_color</item>
         <item name="strokeWidth">2dp</item>
