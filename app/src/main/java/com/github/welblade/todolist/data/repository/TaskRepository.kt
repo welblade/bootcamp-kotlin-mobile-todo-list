@@ -1,6 +1,7 @@
-package com.github.welblade.todolist.data
+package com.github.welblade.todolist.data.repository
 
-import com.github.welblade.todolist.model.Task
+import com.github.welblade.todolist.data.TaskDataSource
+import com.github.welblade.todolist.data.model.Task
 
 class TaskRepository(private val taskDataSource: TaskDataSource) {
     fun getList() = taskDataSource.getList()

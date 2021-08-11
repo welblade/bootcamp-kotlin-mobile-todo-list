@@ -9,8 +9,7 @@ import com.github.welblade.todolist.App
 import com.github.welblade.todolist.R
 import com.github.welblade.todolist.databinding.ActivityFormTaskBinding
 import com.github.welblade.todolist.extensions.format
-import com.github.welblade.todolist.model.Task
-import com.github.welblade.todolist.ui.main.TaskListViewModel
+import com.github.welblade.todolist.data.model.Task
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -20,14 +19,14 @@ class FormTaskActivity: AppCompatActivity() {
     private val binding: ActivityFormTaskBinding by lazy {
         ActivityFormTaskBinding.inflate(layoutInflater)
     }
-    private lateinit var taskListViewModel: TaskListViewModel
+    private lateinit var formTaskViewModel: FormTaskViewModel
     private var currentTaskId:Long = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         //val taskDataSource = TaskDataSourceInMemoryImpl
         //val taskRepository = TaskRepository(taskDataSource)
-        taskListViewModel = TaskListViewModel((application as App).repository)
+        formTaskViewModel = FormTaskViewModel((application as App).repository)
         insertListeners()
         if(intent.hasExtra(TASK_DATE)){
             binding.tilDate.editText?.setText(
@@ -40,7 +39,7 @@ class FormTaskActivity: AppCompatActivity() {
             currentTaskId = intent.getLongExtra(TASK_ID, 0L)
             Thread {
                 try {
-                    taskListViewModel.findById(currentTaskId)?.let {
+                    formTaskViewModel.findById(currentTaskId)?.let {
                         runOnUiThread {
                             binding.tilTitle.editText?.setText(it.title)
                             binding.tilDescription.editText?.setText(it.description)
@@ -93,7 +92,7 @@ class FormTaskActivity: AppCompatActivity() {
                     hour = binding.tilTime.editText?.text.toString(),
                     id = this.currentTaskId
                 )
-                taskListViewModel.insert(task)
+                formTaskViewModel.insert(task)
                 setResult(Activity.RESULT_OK)
                 finish()
             }

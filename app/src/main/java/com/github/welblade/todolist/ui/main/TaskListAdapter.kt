@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.welblade.todolist.R
 import com.github.welblade.todolist.databinding.ItemTaskBinding
-import com.github.welblade.todolist.model.Task
+import com.github.welblade.todolist.data.model.Task
 import java.util.*
 
 class TaskListAdapter: ListAdapter<Task, TaskListAdapter.ViewHolder>(DiffCallBack()) {

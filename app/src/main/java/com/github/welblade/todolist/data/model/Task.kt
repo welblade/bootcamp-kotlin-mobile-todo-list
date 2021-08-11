@@ -1,6 +1,4 @@
-package com.github.welblade.todolist.model
-
-import java.util.zip.CRC32
+package com.github.welblade.todolist.data.model
 
 data class Task(
     val title: String,

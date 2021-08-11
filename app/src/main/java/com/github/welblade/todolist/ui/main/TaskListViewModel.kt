@@ -4,12 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.welblade.todolist.data.TaskRepository
+import com.github.welblade.todolist.data.repository.TaskRepository
 import com.github.welblade.todolist.extensions.format
-import com.github.welblade.todolist.model.Task
+import com.github.welblade.todolist.data.model.Task
 import java.util.*
 
-class TaskListViewModel (private val taskRepository: TaskRepository ): ViewModel() {
+class TaskListViewModel (private val taskRepository: TaskRepository): ViewModel() {
     companion object{
         private const val TAG = "TaskListViewModel"
     }
@@ -30,9 +30,5 @@ class TaskListViewModel (private val taskRepository: TaskRepository ): ViewModel
             }
         }.start()
     }
-
-    fun findById(taskId: Long) = taskRepository.findById(taskId)
-    fun insert(task:Task) = taskRepository.insertTask(task)
-    fun remove(task:Task) = taskRepository.removeTask(task)
-
+    fun remove(task: Task) = taskRepository.removeTask(task)
 }

@@ -38,8 +38,7 @@
         app:layout_constraintBottom_toTopOf="@id/rv_date_list"
         android:layout_marginBottom="8dp"
         style="@style/Theme.TODOList.Caption"
-        android:text="Dezembro"
-        tools:text="Dezembro" />
+        tools:text="@tools:sample/lorem" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_date_list"
         android:layout_width="match_parent"

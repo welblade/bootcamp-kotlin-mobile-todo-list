@@ -1,12 +1,13 @@
-package com.github.welblade.todolist.data
+package com.github.welblade.todolist.data.db
 
-import com.github.welblade.todolist.model.Task
-import com.github.welblade.todolist.model.TaskEntity
+import com.github.welblade.todolist.data.TaskDataSource
+import com.github.welblade.todolist.data.model.Task
+import com.github.welblade.todolist.data.model.TaskEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class TaskDataSourceLocal(private val dao: TaskDao): TaskDataSource {
+class TaskDataSourceLocalImpl(private val dao: TaskDao): TaskDataSource {
     override fun getList(): List<Task> {
         return dao.getAll().map { it.toTask() }
     }
@@ -33,7 +34,7 @@ class TaskDataSourceLocal(private val dao: TaskDao): TaskDataSource {
         }
     }
 
-    override fun findById(taskId: Long): Task? {
+    override fun findById(taskId: Long): Task {
         return dao.findById(taskId).toTask()
     }
 

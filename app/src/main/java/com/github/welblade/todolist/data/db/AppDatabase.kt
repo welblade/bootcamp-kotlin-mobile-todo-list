@@ -1,12 +1,10 @@
-package com.github.welblade.todolist.data
+package com.github.welblade.todolist.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.github.welblade.todolist.model.TaskEntity
+import com.github.welblade.todolist.data.model.TaskEntity
 
 @Database(entities = [TaskEntity::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {

@@ -12,8 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.github.welblade.todolist.App
 import com.github.welblade.todolist.R
-import com.github.welblade.todolist.data.TaskDataSourceInMemoryImpl
-import com.github.welblade.todolist.data.TaskRepository
 import com.github.welblade.todolist.databinding.ActivityMainBinding
 import com.github.welblade.todolist.extensions.format
 import com.github.welblade.todolist.ui.form_task.FormTaskActivity

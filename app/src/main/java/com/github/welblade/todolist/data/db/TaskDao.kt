@@ -1,7 +1,7 @@
-package com.github.welblade.todolist.data
+package com.github.welblade.todolist.data.db
 
 import androidx.room.*
-import com.github.welblade.todolist.model.TaskEntity
+import com.github.welblade.todolist.data.model.TaskEntity
 @Dao
 interface TaskDao {
     @Query("SELECT * FROM TaskTable")

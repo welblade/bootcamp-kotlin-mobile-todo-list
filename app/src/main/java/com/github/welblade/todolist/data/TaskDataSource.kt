@@ -1,6 +1,6 @@
 package com.github.welblade.todolist.data
 
-import com.github.welblade.todolist.model.Task
+import com.github.welblade.todolist.data.model.Task
 
 interface TaskDataSource {
     fun getList(): List<Task>
