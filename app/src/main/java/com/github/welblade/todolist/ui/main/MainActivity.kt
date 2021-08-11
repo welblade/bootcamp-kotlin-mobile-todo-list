@@ -10,7 +10,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.github.welblade.todolist.App
 import com.github.welblade.todolist.R
 import com.github.welblade.todolist.databinding.ActivityMainBinding
 import com.github.welblade.todolist.extensions.format
@@ -20,9 +19,11 @@ import com.github.welblade.todolist.ui.main.adapter.HorizontalSpaceItemDecorator
 import com.github.welblade.todolist.ui.main.adapter.TaskListAdapter
 import com.github.welblade.todolist.ui.main.view_model.DateListViewModel
 import com.github.welblade.todolist.ui.main.view_model.TaskListViewModel
+import com.github.welblade.todolist.util.TextSelectUtil
 import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private val dateViewModel: DateListViewModel by lazy {
         DateListViewModel()
     }
-    private lateinit var taskListViewModel: TaskListViewModel
+    private val taskListViewModel: TaskListViewModel by viewModel()
 
     private val dateAdapter: DateListAdapter by lazy { DateListAdapter() }
     private val startForResult = registerForActivityResult(
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        taskListViewModel = TaskListViewModel((application as App).repository)
         initRVDate(Date())
         initTaskList()
         insertListeners()
@@ -102,6 +102,9 @@ class MainActivity : AppCompatActivity() {
         dateAdapter.selectDateListener = {
             dateAdapter.selectDate(it)
             taskListViewModel.getList(it)
+            binding.emptyStateLayout.tvHeadline.text =
+                TextSelectUtil.getEmptyStateText(this, it)
+            binding.tvTasksOfDay.text = TextSelectUtil.getTaskOfDayText(this, it)
         }
         binding.rvDateList.addOnChildAttachStateChangeListener( object: RecyclerView.OnChildAttachStateChangeListener{
             override fun onChildViewAttachedToWindow(view: View) {

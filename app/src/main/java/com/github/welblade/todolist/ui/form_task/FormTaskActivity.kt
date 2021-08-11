@@ -14,20 +14,21 @@ import com.github.welblade.todolist.ui.form_task.view_model.FormTaskViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class FormTaskActivity: AppCompatActivity() {
     private val binding: ActivityFormTaskBinding by lazy {
         ActivityFormTaskBinding.inflate(layoutInflater)
     }
-    private lateinit var formTaskViewModel: FormTaskViewModel
+
+    private val formTaskViewModel: FormTaskViewModel by viewModel()
+
     private var currentTaskId:Long = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        //val taskDataSource = TaskDataSourceInMemoryImpl
-        //val taskRepository = TaskRepository(taskDataSource)
-        formTaskViewModel = FormTaskViewModel((application as App).repository)
         insertListeners()
         if(intent.hasExtra(TASK_DATE)){
             binding.tilDate.editText?.setText(

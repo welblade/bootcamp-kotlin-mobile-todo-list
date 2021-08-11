@@ -12,8 +12,19 @@
     <string name="edit">Edit</string>
     <string name="remove">Remove</string>
     <string name="ooops_you_don_t_have_any_task_today">Ooops, you don\'t have nothing TO DO today!</string>
+    <string name="ooops_you_don_t_have_any_task_tomorrow">Ooops, you don\'t have nothing TO DO tomorrow!</string>
+    <string name="ooops_you_don_t_have_any_task_the_next">Ooops, you don\'t have nothing TO DO next %s!</string>
+    <string name="ooops_you_don_t_have_any_task_on_day">Ooops, you don\'t have nothing TO DO in %s!</string>
+    <string name="ooops_you_had_any_task_yesterday">Ooops, you had nothing TO DO yesterday!</string>
+    <string name="ooops_you_had_any_task_last">Ooops, you had nothing TO DO last %s!</string>
+    <string name="ooops_you_had_any_task_on_day">Ooops, you had nothing TO DO %s!</string>
     <string name="a_sleeping_cat">A sleeping cat</string>
     <string name="day_tasks">Today\'s tasks</string>
+    <string name="tomorrow_tasks">Tomorrow\'s tasks</string>
+    <string name="week_tasks">%s\'s tasks</string>
+    <string name="future_tasks">Tasks to %s</string>
+    <string name="yesterday_tasks">Yesterday\'s tasks</string>
+    <string name="past_tasks">Tasks from %s</string>
     <string name="description">Description</string>
     <string name="empty_field">This field can\'t be empty </string>
 </resources>
