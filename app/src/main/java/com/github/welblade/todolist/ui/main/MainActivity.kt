@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.github.welblade.todolist.App
 import com.github.welblade.todolist.R
 import com.github.welblade.todolist.data.TaskDataSourceInMemoryImpl
 import com.github.welblade.todolist.data.TaskRepository
@@ -44,9 +45,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val taskDataSource = TaskDataSourceInMemoryImpl
-        val taskRepository = TaskRepository(taskDataSource)
-        taskListViewModel = TaskListViewModel(taskRepository)
+        //val taskDataSource = TaskDataSourceInMemoryImpl
+        //val taskRepository = TaskRepository(taskDataSource)
+        taskListViewModel = TaskListViewModel((application as App).repository)
         initRVDate(Date())
         initTaskList()
         insertListeners()

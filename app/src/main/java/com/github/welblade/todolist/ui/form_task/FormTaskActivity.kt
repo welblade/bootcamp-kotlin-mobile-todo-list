@@ -2,11 +2,11 @@ package com.github.welblade.todolist.ui.form_task
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.github.welblade.todolist.App
 import com.github.welblade.todolist.R
-import com.github.welblade.todolist.data.TaskDataSourceInMemoryImpl
-import com.github.welblade.todolist.data.TaskRepository
 import com.github.welblade.todolist.databinding.ActivityFormTaskBinding
 import com.github.welblade.todolist.extensions.format
 import com.github.welblade.todolist.model.Task
@@ -21,13 +21,13 @@ class FormTaskActivity: AppCompatActivity() {
         ActivityFormTaskBinding.inflate(layoutInflater)
     }
     private lateinit var taskListViewModel: TaskListViewModel
-    private var currentTaskId:String = ""
+    private var currentTaskId:Long = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val taskDataSource = TaskDataSourceInMemoryImpl
-        val taskRepository = TaskRepository(taskDataSource)
-        taskListViewModel = TaskListViewModel(taskRepository)
+        //val taskDataSource = TaskDataSourceInMemoryImpl
+        //val taskRepository = TaskRepository(taskDataSource)
+        taskListViewModel = TaskListViewModel((application as App).repository)
         insertListeners()
         if(intent.hasExtra(TASK_DATE)){
             binding.tilDate.editText?.setText(
@@ -35,19 +35,25 @@ class FormTaskActivity: AppCompatActivity() {
             )
         }
         if(intent.hasExtra(TASK_ID)){
-            currentTaskId = intent.getStringExtra(TASK_ID) as String
-            taskListViewModel.findById(currentTaskId)?.let {
-                binding.tilTitle.editText?.setText( it.title)
-                binding.tilDescription.editText?.setText(it.description)
-                binding.tilDate.editText?.setText( it.date)
-                binding.tilTime.editText?.setText( it.hour)
-            }
             binding.toolbar.title = getString(R.string.edit_task)
             binding.btSave.text = getString(R.string.save_changes)
+            currentTaskId = intent.getLongExtra(TASK_ID, 0L)
+            Thread {
+                try {
+                    taskListViewModel.findById(currentTaskId)?.let {
+                        runOnUiThread {
+                            binding.tilTitle.editText?.setText(it.title)
+                            binding.tilDescription.editText?.setText(it.description)
+                            binding.tilDate.editText?.setText(it.date)
+                            binding.tilTime.editText?.setText(it.hour)
+                        }
+                    }
+                }catch (err: Exception){
+                    Log.e("TaskEdit", "Query: " + err.message.toString())
+                }
+            }.start()
         }
     }
-
-
 
     private fun insertListeners() {
         binding.tilDate.editText?.setOnClickListener {

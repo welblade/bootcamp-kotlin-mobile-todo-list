@@ -9,7 +9,7 @@ data class TaskEntity(
     val description: String,
     val date: String,
     val hour: String,
-    @PrimaryKey val id: String
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L
 ) {
     companion object {
         fun from(task: Task): TaskEntity {
