@@ -1,4 +1,4 @@
-package com.github.welblade.todolist.ui.form_task
+package com.github.welblade.todolist.ui.form_task.view_model
 
 import androidx.lifecycle.ViewModel
 import com.github.welblade.todolist.data.model.Task

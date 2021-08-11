@@ -1,4 +1,4 @@
-package com.github.welblade.todolist.ui.main
+package com.github.welblade.todolist.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

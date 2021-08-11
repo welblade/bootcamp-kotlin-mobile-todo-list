@@ -1,4 +1,4 @@
-package com.github.welblade.todolist.ui.main
+package com.github.welblade.todolist.ui.main.view_model
 
 import android.util.Log
 import androidx.lifecycle.LiveData

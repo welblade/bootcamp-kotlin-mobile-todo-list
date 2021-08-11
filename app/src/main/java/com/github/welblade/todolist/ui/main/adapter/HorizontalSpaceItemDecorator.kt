@@ -1,4 +1,4 @@
-package com.github.welblade.todolist.ui.main
+package com.github.welblade.todolist.ui.main.adapter
 
 import android.graphics.Rect
 import android.view.View

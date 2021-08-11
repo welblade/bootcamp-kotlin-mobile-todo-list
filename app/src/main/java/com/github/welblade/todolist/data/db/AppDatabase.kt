@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.github.welblade.todolist.data.model.TaskEntity
 
-@Database(entities = [TaskEntity::class], version = 3)
+@Database(entities = [TaskEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao() : TaskDao
 
@@ -20,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "task_db"
-                ).fallbackToDestructiveMigration().build()
+                ).fallbackToDestructiveMigrationOnDowngrade().build()
                 instance = db
                 db
             }

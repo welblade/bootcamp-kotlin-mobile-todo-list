@@ -1,4 +1,4 @@
-package com.github.welblade.todolist.ui.main
+package com.github.welblade.todolist.ui.main.view_model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

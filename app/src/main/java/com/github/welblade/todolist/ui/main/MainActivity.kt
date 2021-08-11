@@ -15,6 +15,11 @@ import com.github.welblade.todolist.R
 import com.github.welblade.todolist.databinding.ActivityMainBinding
 import com.github.welblade.todolist.extensions.format
 import com.github.welblade.todolist.ui.form_task.FormTaskActivity
+import com.github.welblade.todolist.ui.main.adapter.DateListAdapter
+import com.github.welblade.todolist.ui.main.adapter.HorizontalSpaceItemDecorator
+import com.github.welblade.todolist.ui.main.adapter.TaskListAdapter
+import com.github.welblade.todolist.ui.main.view_model.DateListViewModel
+import com.github.welblade.todolist.ui.main.view_model.TaskListViewModel
 import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
