@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TO DO List</string>
+    <string name="create_task">Criar Tarefa</string>
+    <string name="edit_task">Editar Tarefa</string>
+    <string name="save_changes">Guardar Alterações</string>
+    <string name="title">Título</string>
+    <string name="time">Hora</string>
+    <string name="date">Data</string>
+    <string name="tasks">Tarefas</string>
+    <string name="more">Mais</string>
+    <string name="edit">Editar</string>
+    <string name="remove">Remover</string>
+    <string name="ooops_you_don_t_have_any_task_today">Opa, você não tem nada para fazer hoje!</string>
+    <string name="ooops_you_don_t_have_any_task_tomorrow">Opa, você não tem nada para fazer amanhã!</string>
+    <string name="ooops_you_don_t_have_any_task_the_next">Opa, você não tem nada para fazer %s!</string>
+    <string name="ooops_you_don_t_have_any_task_on_day">Opa, você não tem nada para fazer %s!</string>
+    <string name="ooops_you_had_any_task_yesterday">Eita, você não tinha nada para fazer ontem!</string>
+    <string name="ooops_you_had_any_task_last">Eita, você não tinha nada para fazer %s!</string>
+    <string name="ooops_you_had_any_task_on_day">Eita, você não tinha nada para fazer %s!</string>
+    <string name="a_sleeping_cat">Um gatinho dorminhoco!</string>
+    <string name="day_tasks">Tarefas de Hoje</string>
+    <string name="tomorrow_tasks">Tarefas de Amanhã</string>
+    <string name="week_tasks">Tarefas de %s</string>
+    <string name="future_tasks">Tarefas para %S</string>
+    <string name="yesterday_tasks">Tarefas de Ontem</string>
+    <string name="past_tasks">Tarefas de %s</string>
+    <string name="description">Descrição</string>
+    <string name="empty_field">Este campo não pode ficar vazio</string>
+</resources>
