@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val adapter: TaskListAdapter by lazy { TaskListAdapter() }
 
     private val dateViewModel: DateListViewModel by lazy {
-        DateListViewModel(Date())
+        DateListViewModel()
     }
     private lateinit var taskListViewModel: TaskListViewModel
 
@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        //val taskDataSource = TaskDataSourceInMemoryImpl
-        //val taskRepository = TaskRepository(taskDataSource)
         taskListViewModel = TaskListViewModel((application as App).repository)
         initRVDate(Date())
         initTaskList()
