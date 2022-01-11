@@ -1,4 +1,4 @@
-## Bootcamp Santander Mobile Developer
+## Bootcamp Kotlin
 Atividade Final da Trilha de Kotlin
 
 O objetivo do projeto era fazer uma aplicativo de lista de tarefas utilizando as melhores práticas no desenvolvimento de App para android utilizando kotlin.
